@@ -1,5 +1,6 @@
 ﻿using eNewShopSolution.Data.Configurations;
 using eNewShopSolution.Data.Entities;
+using eNewShopSolution.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -15,6 +16,8 @@ namespace eNewShopSolution.Data.EF
         {
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Seed();
             //base.OnModelCreating(modelBuilder);
         }
 
