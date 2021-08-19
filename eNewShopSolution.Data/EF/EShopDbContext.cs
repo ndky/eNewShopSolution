@@ -1,5 +1,7 @@
-﻿using eNewShopSolution.Data.Entities;
+﻿using eNewShopSolution.Data.Configurations;
+using eNewShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace eNewShopSolution.Data.EF
 {
@@ -7,6 +9,13 @@ namespace eNewShopSolution.Data.EF
     {
         public EShopDbContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<AppConfig> AppConfigs { get; set; }
